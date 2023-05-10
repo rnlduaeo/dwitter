@@ -1,0 +1,12 @@
+export class TokenStorage {
+
+    saveToken(token) {
+        localStorage.setItem('TOKEN', token);
+    }
+    getToken() {
+        return localStorage.getItem('TOKEN');
+    }
+    clearToken() {
+        localStorage.removeItem('TOKEN');
+    }
+}
