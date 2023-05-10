@@ -1,0 +1,10 @@
+POST http://localhost:8080/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+	"username": "haemikim",
+	"password": "{{password}}",
+	"name": "Haemi Kim",
+	"email": "haemikim@amazon.com",
+	"profileUrl": "https://d2qt42rcwzspd6.cloudfront.net/overall.png"
+}

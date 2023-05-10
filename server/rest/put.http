@@ -1,0 +1,9 @@
+PUT http://localhost:8080/tweets HTTP/1.1
+content-type: application/json
+Authorization: Bearer 
+
+{
+    "name": "Ellie",
+    "username": "ellie",
+    "text": "tweet~~~"
+}
