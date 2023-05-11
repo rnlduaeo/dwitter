@@ -1,7 +1,7 @@
 import { db } from "../db/database.js";
 
 const SELECT_JOIN =
-  "SELECT u.username, u.name, u.url, t.createdAt, t.text \
+  "SELECT t.id, u.username, u.name, u.url, t.userId, t.createdAt, t.text \
 FROM users u \
 RIGHT JOIN tweets t \
 ON u.id = t.userId";

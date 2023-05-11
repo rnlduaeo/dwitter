@@ -6,9 +6,7 @@ import { config } from "../config.js";
 
 export async function signup(req, res) {
   const { username, password, name, email, url } = req.body;
-  console.log(username);
   const found = await userRepository.findByUsername(username);
-  console.log(found);
   if (found) {
     return res.status(409).json({ message: `${username} already exists` });
   }
@@ -34,6 +32,7 @@ export async function login(req, res) {
   if (!isValidPassword) {
     return res.status(401).json({ message: "Invalid user or password" });
   }
+
   const token = createJwtToken(user.id);
   res.status(200).json({ token, username });
 }
