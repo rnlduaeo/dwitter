@@ -32,7 +32,9 @@ export async function login(req, res) {
   if (!isValidPassword) {
     return res.status(401).json({ message: "Invalid user or password" });
   }
+
   const token = createJwtToken(user.id);
+  console.log(token);
   res.status(200).json({ token, username });
 }
 

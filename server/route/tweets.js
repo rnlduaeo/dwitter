@@ -32,9 +32,6 @@ router.get(
   isAuth,
   tweetController.getUserTweet
 );
-// router.get('/path', (req, res) => {
-//     req.get()
-// })
 
 router.post(
   "/",

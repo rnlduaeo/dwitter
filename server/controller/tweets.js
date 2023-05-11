@@ -23,12 +23,12 @@ export async function postTweet(req, res) {
 // tweetId로 tweet을 찾아서 username과 같을 때만 허용
 export async function deleteTweet(req, res) {
   const tweetId = req.params.id;
-  const username = req.username;
+  const userId = req.userId;
   const tweet = await tweetRepository.findById(tweetId);
 
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet.username !== username) {
+  } else if (tweet.userId !== userId) {
     return res.sendStatus(403);
   }
 
@@ -38,13 +38,13 @@ export async function deleteTweet(req, res) {
 
 export async function putTweet(req, res) {
   const text = req.body.text;
-  const username = req.username;
+  const userId = req.userId;
   const tweetId = req.params.id;
   const tweet = await tweetRepository.findById(tweetId);
 
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet.username !== username) {
+  } else if (tweet.userId !== userId) {
     return res.sendStatus(403);
   }
 
