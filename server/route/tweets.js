@@ -66,8 +66,4 @@ router.put(
   tweetController.putTweet
 );
 
-// router.get("/", (req, res) => {
-//     req.
-// })
-
 export default router;

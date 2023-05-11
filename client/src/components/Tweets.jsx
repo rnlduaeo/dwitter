@@ -33,7 +33,8 @@ const Tweets = memo(({ tweetService, username, addable }) => {
       )
       .catch((error) => setError(error.toString()));
 
-  const onUpdate = (tweetId, text) =>
+  const onUpdate = (tweetId, text) => {
+    console.log(tweetId);
     tweetService
       .updateTweet(tweetId, text)
       .then((updated) =>
@@ -42,6 +43,8 @@ const Tweets = memo(({ tweetService, username, addable }) => {
         )
       )
       .catch((error) => error.toString());
+  }
+    
 
   const onUsernameClick = (tweet) => history.push(`/${tweet.username}`);
 
