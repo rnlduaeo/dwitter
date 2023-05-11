@@ -1,27 +1,62 @@
-import { db } from "../db/database.js";
+import { sequelize } from "../db/database.js";
+import { DataTypes } from "sequelize";
+
+export const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  },
+  {
+    modelName: "User",
+    timestamps: false,
+  }
+);
+
+// await sequelize.sync();
 
 export async function findByUsername(username) {
-  return db
-    .query("SELECT * FROM users WHERE username=?", username)
-    .then((result) => {
-      return result[0][0];
-    });
+  return User.findOne({ where: { username } });
 }
 
 export async function findById(id) {
-  return db.query("SELECT * FROM users WHERE id=?", id).then((result) => {
-    return result[0][0];
-  });
+  return User.findByPk(id);
 }
 
 export async function createUser(user) {
   const { username, password, name, email, url } = user;
-  return db
-    .query(
-      "INSERT INTO users (username, password, name, email, url) VALUES (?,?,?,?,?)",
-      [username, password, name, email, url]
-    )
-    .then((result) => {
-      return result[0].insertId;
-    });
+
+  const created = await User.create({
+    username: username,
+    password: password,
+    name: name,
+    email: email,
+    url: url,
+  });
+
+  return created.dataValues.id;
 }

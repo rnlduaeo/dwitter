@@ -7,13 +7,14 @@ export async function getTweets(req, res) {
 }
 
 export async function getUserTweet(req, res) {
-  const username = req.params.username;
-  res.status(200).send(await tweetRepository.get(username));
+  const userId = req.userId;
+  res.status(200).send(await tweetRepository.get(userId));
 }
 
 export async function postTweet(req, res) {
-  const { name, username, text } = req.body;
-  const userTweet = await tweetRepository.create(name, username, text);
+  const text = req.body.text;
+  const userId = req.userId;
+  const userTweet = await tweetRepository.create(userId, text);
   const socketIO = getSocket();
   socketIO.emit("newTweet", userTweet);
   res.status(201).send(userTweet);
@@ -28,7 +29,7 @@ export async function deleteTweet(req, res) {
 
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet.userId !== userId) {
+  } else if (tweet[0].dataValues.userId !== userId) {
     return res.sendStatus(403);
   }
 
@@ -40,10 +41,12 @@ export async function putTweet(req, res) {
   const text = req.body.text;
   const userId = req.userId;
   const tweetId = req.params.id;
+
   const tweet = await tweetRepository.findById(tweetId);
+
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet.userId !== userId) {
+  } else if (tweet[0].dataValues.userId !== userId) {
     return res.sendStatus(403);
   }
 

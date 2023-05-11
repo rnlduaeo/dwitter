@@ -7,6 +7,7 @@ import { config } from "../config.js";
 export async function signup(req, res) {
   const { username, password, name, email, url } = req.body;
   const found = await userRepository.findByUsername(username);
+  console.log(found);
   if (found) {
     return res.status(409).json({ message: `${username} already exists` });
   }
