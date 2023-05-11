@@ -1,10 +1,10 @@
 // By using brackets you can define the property you want to access dynamically. With the dot notation you would need to know the name of the property in the code, while with brackets you can determine it at run time.
-function required(key, defaultValue = undefined) {
+function required(key: string, defaultValue?: number | string | undefined) {
   const value = process.env[key] || defaultValue;
-  if (value === null) {
+  if (value === undefined) {
     throw new Error(`Key ${key} is undefined`);
   }
-  return value;
+  return value?.toString();
 }
 export const config = {
   jwt: {
@@ -16,12 +16,5 @@ export const config = {
   },
   host: {
     port: parseInt(required("HOST_PORT", 8080)),
-  },
-  db: {
-    dialect: required("DIALECT"),
-    host: required("DB_HOST"),
-    user: required("DB_USER"),
-    database: required("DB_DATABASE"),
-    password: required("DB_PASSWORD"),
   },
 };

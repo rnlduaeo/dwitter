@@ -1,9 +1,9 @@
-PUT http://localhost:8080/tweets/10 HTTP/1.1
+PUT http://localhost:8080/tweets/1 HTTP/1.1
 content-type: application/json
 Authorization: Bearer 
 
 {
-    "name": "Haemi Kim",
-    "username": "haemikim",
+    "name": "Ellie",
+    "username": "ellie",
     "text": "tweet~~~1111222"
 }

@@ -1,4 +1,4 @@
-import * as tweetRepository from "../data/tweets.js";
+import * as tweetRepository from "../data/tweets";
 import { getSocket } from "../socket/socket.js";
 
 // function 앞에 async가 붙으면 return data가 다 promise 형태로 반환됨. tweetRepository.get().then을 쓰거나 또는 앞에 await을 붙여주면 됨.
@@ -29,7 +29,7 @@ export async function deleteTweet(req, res) {
 
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet[0].dataValues.userId !== userId) {
+  } else if (tweet.userId !== userId) {
     return res.sendStatus(403);
   }
 
@@ -46,7 +46,7 @@ export async function putTweet(req, res) {
 
   if (!tweet) {
     return res.sendStatus(404);
-  } else if (tweet[0].dataValues.userId !== userId) {
+  } else if (tweet.userId !== userId) {
     return res.sendStatus(403);
   }
 
